@@ -53,7 +53,7 @@ public class MainActivity extends PermissionActivity {
                         if(granted) {
                             showFilePicker();
                         } else {
-                            Toast.makeText(getBaseContext(), "เธ–เนเธฒเนเธกเนเธญเธเธธเธเธฒเธ• เธเธฐเนเธกเนเธชเธฒเธกเธฒเธฃเธ–เน€เธเนเธฒเธ–เธถเธเนเธเธฅเนเนเธ”เน", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(), "eorror", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -77,14 +77,14 @@ public class MainActivity extends PermissionActivity {
 
         final Notification.Builder notifBuilder = new Notification.Builder(getBaseContext())
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentText("เธเธณเธฅเธฑเธเธญเธฑเธเนเธซเธฅเธ”");
+                .setContentText("uploading");
 
         final int id = 1122;
         final NotificationManager notifMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mIsUploading = true;
 
         Ion.with(this)
-                .load("http://10.0.2.2/pro-android/upload.php")
+                .load("http://7d84d314.ngrok.io/pro-android/upload.php")
                 .uploadProgress(new ProgressCallback() {
                     @Override
                     public void onProgress(long loaded, long total) {
@@ -102,11 +102,31 @@ public class MainActivity extends PermissionActivity {
                         notifBuilder.setContentText(result);
                         Notification notif = notifBuilder.build();
                         notifMan.notify(id, notif);
-
-                        Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
                         mIsUploading = false;
+                        Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if(id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 
