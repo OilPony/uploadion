@@ -87,7 +87,7 @@ public class MainActivity extends PermissionActivity {
                 .load("http://7d84d314.ngrok.io/pro-android/upload.php")
                 .uploadProgress(new ProgressCallback() {
                     @Override
-                    public void onProgress(long loaded, long total) {
+                    public void onProgress(long loaded,  long total) {
                         notifBuilder.setProgress((int) total, (int) loaded, false);
                         Notification notif = notifBuilder.build();
                         notifMan.notify(id, notif);
